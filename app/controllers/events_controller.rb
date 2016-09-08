@@ -8,7 +8,7 @@ class EventsController < ApplicationController
     @limit = params[:limit] || 50
     @hostname = params[:hostname]
 
-    @events = Event.all.limit(@limit).order(timestamp: :desc)
+    @events = @org.events.all.limit(@limit).order(timestamp: :desc)
     @events = @events.where(hostname: @hostname) if @hostname.present?
   end
 

@@ -57,6 +57,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get org_events_url(@org)
 
     assert_response :success
+    assert_select "tbody tr", 2
     assert_select "tbody tr:nth-child(1) td:nth-child(1)", events(:two).name
     assert_select "tbody tr:nth-child(2) td:nth-child(1)", events(:one).name
   end

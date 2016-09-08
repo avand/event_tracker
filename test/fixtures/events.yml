@@ -10,4 +10,10 @@ two:
   name: MyString
   timestamp: 2016-09-08 15:13:08
   hostname: facebook.com
+  org: one
+
+three:
+  name: MyString
+  timestamp: 2016-09-08 15:13:08
+  hostname: facebook.com
   org: two
