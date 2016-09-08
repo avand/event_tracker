@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :set_org
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create]
 
   # GET /events
   # GET /events.json
@@ -34,7 +35,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         format.html { redirect_to [@org, @event], notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        format.json { render :show, status: :created }
       else
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
