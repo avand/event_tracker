@@ -5,7 +5,11 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @limit = params[:limit] || 50
+    @hostname = params[:hostname]
+
+    @events = Event.all.limit(@limit).order(timestamp: :desc)
+    @events = @events.where(hostname: @hostname) if @hostname.present?
   end
 
   # GET /events/1

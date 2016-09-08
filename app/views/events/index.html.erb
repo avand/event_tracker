@@ -1,5 +1,26 @@
 <h1>Events</h1>
 
+<div style="background-color: #eee; padding: 20px;">
+  <%= form_tag org_events_path(@org), method: :get do %>
+    <div class="field">
+      <label>
+        Limit: <%= number_field_tag :limit, @limit %>
+      </label>
+    </div>
+
+    <div class="field">
+      <label>
+        Hostname: <%= text_field_tag :hostname, @hostname %>
+      </label>
+    </div>
+
+    <%= submit_tag "Search" %>
+    &middot; <%= link_to "Reset", org_events_path(@org) %>
+  <% end %>
+</div>
+
+<br>
+
 <% if @events.present? %>
   <table>
     <thead>
