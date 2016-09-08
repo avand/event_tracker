@@ -2,47 +2,74 @@ require 'test_helper'
 
 class EventsControllerTest < ActionDispatch::IntegrationTest
   setup do
+    @org = orgs(:one)
     @event = events(:one)
   end
 
-  test "should get index" do
-    get events_url
-    assert_response :success
-  end
-
   test "should get new" do
-    get new_event_url
+    get new_org_event_url(@org)
     assert_response :success
   end
 
   test "should create event" do
     assert_difference('Event.count') do
-      post events_url, params: { event: { hostname: @event.hostname, name: @event.name, org_id: @event.org_id, timestamp: @event.timestamp } }
+      post org_events_url(@org), params: { event: {
+        hostname: @event.hostname,
+        name: @event.name,
+        org_id: @event.org_id,
+        timestamp: @event.timestamp
+      } }
     end
 
-    assert_redirected_to event_url(Event.last)
+    assert_redirected_to org_event_url(@org, Event.last)
   end
 
   test "should show event" do
-    get event_url(@event)
+    get org_event_url(@org, @event)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_event_url(@event)
+    get edit_org_event_url(@org, @event)
     assert_response :success
   end
 
   test "should update event" do
-    patch event_url(@event), params: { event: { hostname: @event.hostname, name: @event.name, org_id: @event.org_id, timestamp: @event.timestamp } }
-    assert_redirected_to event_url(@event)
+    patch org_event_url(@org, @event), params: { event: {
+      hostname: @event.hostname,
+      name: @event.name,
+      org_id: @event.org_id,
+      timestamp: @event.timestamp
+    } }
+
+    assert_redirected_to org_event_url(@org, @event)
   end
 
   test "should destroy event" do
     assert_difference('Event.count', -1) do
-      delete event_url(@event)
+      delete org_event_url(@org, @event)
     end
 
-    assert_redirected_to events_url
+    assert_redirected_to org_events_url
+  end
+
+  test "should list all events in reverse chronological order" do
+    get org_events_url(@org)
+
+    assert_response :success
+    assert_select "tbody tr:nth-child(1) td:nth-child(1)", events(:two).name
+    assert_select "tbody tr:nth-child(2) td:nth-child(1)", events(:one).name
+  end
+
+  test "should limit the number of events" do
+    get org_events_url(@org, limit: 1)
+
+    assert_select "tbody tr", 1
+  end
+
+  test "should filter events by hostname" do
+    get org_events_url(@org, hostname: "google.com")
+
+    assert_select "tbody tr", 1
   end
 end

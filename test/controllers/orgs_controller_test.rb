@@ -20,12 +20,7 @@ class OrgsControllerTest < ActionDispatch::IntegrationTest
       post orgs_url, params: { org: { name: @org.name } }
     end
 
-    assert_redirected_to org_url(Org.last)
-  end
-
-  test "should show org" do
-    get org_url(@org)
-    assert_response :success
+    assert_redirected_to orgs_url
   end
 
   test "should get edit" do
@@ -35,7 +30,7 @@ class OrgsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update org" do
     patch org_url(@org), params: { org: { name: @org.name } }
-    assert_redirected_to org_url(@org)
+    assert_redirected_to orgs_url
   end
 
   test "should destroy org" do
