@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EventTracker</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <p id="notice"><%= notice %></p>
+
+    <% if @org.present? && @org.persisted? %>
+      <%= link_to_unless_current "Orgs", orgs_path %> ›
+      <%= link_to_unless_current truncate(@org.name), org_path(@org) %>
+      <% if @event.present? && @event.persisted? %>
+      › <%= link_to_unless_current "Events", org_events_path(@org) %>
+      <% end %>
+    <% end %>
+
+    <%= yield %>
+  </body>
+</html>

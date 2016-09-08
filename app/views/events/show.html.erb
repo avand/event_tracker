@@ -1,0 +1,17 @@
+<p>
+  <strong>Name:</strong>
+  <%= @event.name %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @event.timestamp %>
+</p>
+
+<p>
+  <strong>Hostname:</strong>
+  <%= @event.hostname %>
+</p>
+
+<%= link_to 'Edit', edit_org_event_path(@org, @event) %> |
+<%= link_to 'Back', org_events_path(@org) %>
