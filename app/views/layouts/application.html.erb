@@ -13,7 +13,7 @@
 
     <% if @org.present? && @org.persisted? %>
       <%= link_to_unless_current "Orgs", orgs_path %> ›
-      <%= link_to_unless_current truncate(@org.name), org_path(@org) %>
+      <%= truncate(@org.name) %>
       <% if @event.present? && @event.persisted? %>
       › <%= link_to_unless_current "Events", org_events_path(@org) %>
       <% end %>
