@@ -17,7 +17,7 @@ To create an event, you need to create an Org first. You can do that by going to
 Once an Org exists, you can create an event via HTTP POST.
 
 ```
-curl -d "event[name]=foo&event[timestamp]=2016-09-08T22:43:00.000Z&event[hostname]=foo.com" http://nr-event-tracker.herokuapp.com/orgs/2/events.json
+curl -d "event[name]=foo&event[timestamp]=2016-09-08T22:43:00.000Z&event[hostname]=foo.com" 'http://nr-event-tracker.herokuapp.com/orgs/2/events.json'
 ```
 
 ### Retrieve Events via API
@@ -25,13 +25,13 @@ curl -d "event[name]=foo&event[timestamp]=2016-09-08T22:43:00.000Z&event[hostnam
 To retrieve events, simply perform an HTTP GET:
 
 ```
-curl http://nr-event-tracker.herokuapp.com/orgs/1/events.json
+curl 'http://nr-event-tracker.herokuapp.com/orgs/2/events.json'
 ```
 
 By default, you’ll see 50 results in reverse chronological order. Limit results by providing a `limit` parameter and restrict events by hostname by providing a `hostname` parameter:
 
 ```
-curl http://nr-event-tracker.herokuapp.com/orgs/1/events.json?limit=1&hostname=newrelic.com
+curl 'http://nr-event-tracker.herokuapp.com/orgs/2/events.json?limit=1&hostname=newrelic.com'
 ```
 
 Alternatively, you can use the UI provided mostly by Rails’ scaffolding to create and list events.
